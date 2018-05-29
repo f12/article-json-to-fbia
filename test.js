@@ -26,8 +26,8 @@ test('blocks', t => {
   }];
 
   const actual = toFbia(data);
-  const expected = tsml
-    `<article>
+  const expected = tsml`
+    <article>
       <p>
         <a href="http://mic.com">link</a>
         <br/>
@@ -143,7 +143,7 @@ test('video', t => {
   const actual = toFbia(data);
   const expected = tsml
     `<article>
-      <figure>
+      <figure data-feedback=\"fb:likes,fb:comments\">
         <video width=\"600\" height=\"200\">
           <source src=\"http://example.com/video.mp4\"></source>
         </video>
@@ -168,6 +168,55 @@ test('youtube', t => {
       </figure>
     </article>`;
 
+  t.is(actual, expected);
+});
+
+test('vimeo', t => {
+  const data = [{
+    type: 'embed',
+    embedType: 'vimeo',
+    id: 'abc'
+  }];
+
+  const actual = toFbia(data);
+  const expected = tsml
+    `<article>
+      <figure data-feedback="fb:likes,fb:comments" class="op-interactive">
+        <iframe src="https://player.vimeo.com/video/abc" width="640" height="360" frameborder="0" allowfullscreen="true"></iframe>
+      </figure>
+    </article>`;
+
+  t.is(actual, expected);
+});
+
+test('facebook', t => {
+  const input = [{
+    'type': 'embed',
+    'embedType': 'facebook',
+    'caption': [],
+    'attribution': [],
+    'headline': '',
+    'url': 'https://www.facebook.com/barackobama/photos/a.10155401589571749.1073741832.6815841748/10155872770941749?type=3',
+    'date': 'Miércoles, 16 de mayo de 2018',
+    'user': 'Barack Obama',
+    'text': [
+      {
+        'content': 'Over the past few days, the first class of Obama Foundation Fellows gathered to get to know each other and share what...',
+        'href': null
+      }
+    ],
+    'embedAs': 'photo'
+  }];
+  const actual = toFbia(input);
+  const expected = tsml`
+    <article>
+       <figure>
+          <iframe>
+             <div class="fb-post" data-href="https://www.facebook.com/barackobama/photos/a.10155401589571749.1073741832.6815841748/10155872770941749?type=3" data-width="500"><blockquote cite="https://www.facebook.com/barackobama/photos/a.10155401589571749.1073741832.6815841748/10155872770941749?type=3" class="fb-xfbml-parse-ignore"><p>Over the past few days, the first class of Obama Foundation Fellows gathered to get to know each other and share what...</p>Posted by <a href="#" role="button">Barack Obama</a> on <a href="https://www.facebook.com/barackobama/photos/a.10155401589571749.1073741832.6815841748/10155872770941749?type=3">Miércoles, 16 de mayo de 2018</a></blockquote></div>
+             <script async="true" defer="true" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"></script>
+          </iframe>
+       </figure>
+    </article>`;
   t.is(actual, expected);
 });
 

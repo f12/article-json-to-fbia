@@ -1,6 +1,6 @@
 {
   "name": "@mattersmedia/article-json-to-fbia",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "transform article-json to Facebook's instant-articles",
   "main": "dist/index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "@mattersmedia/embeds": "^2.12.0",
+    "@mattersmedia/embeds": "^2.15.0",
     "article-json-html-render": "^2.0.0",
     "deku": "^1.0.0",
     "magic-virtual-element": "^1.0.6",
