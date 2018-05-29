@@ -189,6 +189,23 @@ test('vimeo', t => {
   t.is(actual, expected);
 });
 
+test('giphy', t => {
+  const data = [{
+    type: 'embed',
+    embedType: 'giphy',
+    id: '123'
+  }];
+
+  const actual = toFbia(data);
+  const expected = tsml
+  `<article>
+    <figure data-feedback="fb:likes,fb:comments" class="op-interactive">
+      <iframe src="https://giphy.com/embed/123?html5=true" width="640" height="360" frameborder="0" allowfullscreen="true"></iframe>
+    </figure>
+  </article>`;
+  t.is(actual, expected);
+});
+
 test('facebook', t => {
   const input = [{
     'type': 'embed',
